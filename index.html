@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Sujoy!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --ink: #372b46;
+      --pink: #ef6680;
+      --coral: #ff8c78;
+      --cream: #fffaf2;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+      background: #f9d8d8;
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .card-shell {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 35px 20px;
+      overflow: hidden;
+      background: radial-gradient(circle at 18% 18%, #fff0d2 0 12%, transparent 13%),
+        linear-gradient(135deg, #f8c9ce 0%, #ffdcb8 48%, #dbcef3 100%);
+    }
+
+    .birthday-card {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 650px);
+      overflow: hidden;
+      text-align: center;
+      border-radius: 30px;
+      background: var(--cream);
+      box-shadow: 0 24px 60px rgba(110, 64, 92, .22);
+      animation: appear .8s ease-out both;
+    }
+
+    .card-top {
+      position: relative;
+      padding: 47px 32px 34px;
+      background: linear-gradient(155deg, #fff0d6, #f9d8e0 62%, #e9dcf4);
+    }
+
+    .eyebrow {
+      color: var(--pink);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .date { margin: 25px 0 10px; font-size: .9rem; font-weight: 500; opacity: .7; }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(3.2rem, 10vw, 5.7rem);
+      line-height: .98;
+      letter-spacing: -.07em;
+    }
+
+    h1 span {
+      color: var(--pink);
+      font-family: Pacifico, cursive;
+      font-size: 1.05em;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .message {
+      max-width: 440px;
+      margin: 25px auto 0;
+      color: #5d4c60;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .balloons {
+      position: absolute;
+      top: 17px;
+      right: 28px;
+      display: flex;
+      gap: 3px;
+      font-size: 2rem;
+      transform: rotate(9deg);
+    }
+
+    .balloons span:nth-child(2) { margin-top: -12px; font-size: 2.5rem; }
+
+    .cake {
+      position: relative;
+      width: 94px;
+      margin: 27px auto -54px;
+      font-size: 4.2rem;
+      filter: drop-shadow(0 6px 4px rgba(80, 40, 50, .12));
+      animation: bob 3s ease-in-out infinite;
+    }
+
+    .frosting { display: block; }
+
+    .candle {
+      position: absolute;
+      z-index: 1;
+      top: 1px;
+      left: 48%;
+      width: 6px;
+      height: 23px;
+      border-radius: 3px;
+      background: var(--pink);
+    }
+
+    .flame {
+      position: absolute;
+      z-index: 2;
+      top: -13px;
+      left: 47%;
+      width: 10px;
+      height: 14px;
+      border-radius: 50% 50% 50% 0;
+      background: #ffb531;
+      transform: rotate(-45deg);
+      animation: flicker .7s infinite alternate;
+    }
+
+    .card-bottom { padding: 72px 28px 36px; }
+    .wish { margin: 0 0 21px; color: #776676; font-size: .98rem; }
+
+    button {
+      border: 0;
+      border-radius: 50px;
+      padding: 15px 24px;
+      color: white;
+      background: linear-gradient(100deg, var(--pink), var(--coral));
+      box-shadow: 0 8px 18px rgba(239, 102, 128, .3);
+      cursor: pointer;
+      font: 700 .9rem "DM Sans", sans-serif;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    button:hover, button:focus-visible {
+      box-shadow: 0 11px 24px rgba(239, 102, 128, .4);
+      transform: translateY(-3px);
+    }
+
+    button span { margin-left: 7px; }
+
+    .surprise {
+      max-height: 0;
+      margin: 0 auto;
+      overflow: hidden;
+      color: var(--pink);
+      font-weight: 700;
+      line-height: 1.5;
+      opacity: 0;
+      transition: max-height .5s, margin .5s, opacity .5s;
+    }
+
+    .surprise.show { max-height: 80px; margin: 20px auto 0; opacity: 1; }
+    .signature { margin: 29px 0 0; color: #8e7b88; font-size: .85rem; }
+    .signature span { color: var(--pink); font-size: 1.1rem; }
+
+    .confetti {
+      position: absolute;
+      width: 12px;
+      height: 25px;
+      border-radius: 3px;
+      opacity: .65;
+      transform: rotate(30deg);
+    }
+
+    .confetti-one { top: 13%; left: 10%; background: #f36d91; }
+    .confetti-two { right: 12%; top: 23%; height: 14px; background: #8c70d6; transform: rotate(-35deg); }
+    .confetti-three { bottom: 15%; left: 15%; background: #f5a942; transform: rotate(55deg); }
+
+    @keyframes appear { from { opacity: 0; transform: translateY(22px) scale(.97); } to { opacity: 1; transform: none; } }
+    @keyframes bob { 50% { transform: translateY(-5px); } }
+    @keyframes flicker { to { transform: rotate(-35deg) scale(1.15); } }
+
+    @media (max-width: 500px) {
+      .card-top { padding: 40px 22px 29px; }
+      .card-bottom { padding: 67px 20px 30px; }
+      .balloons { right: 15px; font-size: 1.5rem; }
+      .balloons span:nth-child(2) { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card-shell">
+    <div class="confetti confetti-one"></div>
+    <div class="confetti confetti-two"></div>
+    <div class="confetti confetti-three"></div>
+
+    <section class="birthday-card" aria-labelledby="card-title">
+      <div class="card-top">
+        <span class="eyebrow">A little celebration for you</span>
+        <div class="balloons" aria-hidden="true"><span>🎈</span><span>🎈</span><span>🎈</span></div>
+        <p class="date">Today is all about you</p>
+        <h1 id="card-title">Happy Birthday,<br /><span>Sujoy!</span></h1>
+        <p class="message">May your special day be filled with big smiles, wonderful surprises, and all the happiness you deserve.</p>
+        <div class="cake" aria-hidden="true"><span class="flame"></span><span class="candle"></span><span class="frosting">🎂</span></div>
+      </div>
+
+      <div class="card-bottom">
+        <p class="wish">Here’s to another amazing trip around the sun!</p>
+        <button id="wishButton" type="button">Open your birthday surprise <span>✨</span></button>
+        <p id="surprise" class="surprise" role="status">You make every day brighter. Have the best birthday ever, Sujoy! 🎉</p>
+        <p class="signature">With lots of good wishes <span>♥</span></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const wishButton = document.getElementById("wishButton");
+    const surprise = document.getElementById("surprise");
+
+    wishButton.addEventListener("click", () => {
+      const isOpen = surprise.classList.toggle("show");
+      wishButton.innerHTML = isOpen
+        ? "Your surprise is open <span>💖</span>"
+        : "Open your birthday surprise <span>✨</span>";
+    });
+  </script>
+</body>
+</html>
